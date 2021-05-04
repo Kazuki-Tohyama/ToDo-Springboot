@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>ToDoSample</title>
+    </head>
+    <body>
+    	<div th:if="${taskList.size() == 0}">タスクがありません。</div>
+    	<div th:unless="${taskList.size() == 0}">
+    		<div th:each="task : ${taskList}">
+    			<p th:text="${task.getTaskName()}"></p>
+    		</div>
+    	</div>
+    	<form th:action="@{/addtask}" th:object="${newTask}" method="post">
+    		<input type="text" th:field="*{taskName}" />
+    		<input type="submit" value="追加" />
+    	</form>
+    </body>
+</html>
