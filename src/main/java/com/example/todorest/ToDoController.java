@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ToDoController {
@@ -21,8 +22,14 @@ public class ToDoController {
 	}
 	
 	@PostMapping("/addtask")
-	public String add(@ModelAttribute Task newTask, Model model) {
+	public String addTask(@ModelAttribute Task newTask, Model model) {
 		taskList.add(newTask);
+		return "redirect:/";
+	}
+	
+	@PostMapping("/deletetask")
+	public String deleteTask(@RequestParam int id, Model model) {
+		taskList.remove(id);
 		return "redirect:/";
 	}
 	
