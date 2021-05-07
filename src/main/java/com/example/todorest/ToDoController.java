@@ -14,21 +14,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ToDoController {
 	List<Task> taskList = new ArrayList<Task>();
 	
+	@ModelAttribute("taskList")
+	public List<Task> setUpTaskList() {
+		return taskList;
+	}
+	
+	@ModelAttribute("newTask")
+	public Task setUpFormTask() {
+		return new Task();
+	}
+	
 	@GetMapping("/")
 	public String index(Model model) {
-		model.addAttribute("taskList", taskList);
-		model.addAttribute("newTask", new Task());
 		return "index";
 	}
 	
 	@PostMapping("/addtask")
-	public String addTask(@ModelAttribute Task newTask, Model model) {
+	public String addTask(@ModelAttribute("newTask") Task newTask, Model model) {
 		taskList.add(newTask);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/deletetask")
-	public String deleteTask(@RequestParam int id, Model model) {
+	public String deleteTask(@RequestParam("id") int id, Model model) {
 		taskList.remove(id);
 		return "redirect:/";
 	}
