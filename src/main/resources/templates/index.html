@@ -15,8 +15,8 @@
     			</form>
     		</div>
     	</div>
-    	<form th:action="@{/addtask}" th:object="${newTask}" method="post">
-    		<input type="text" th:field="*{taskName}" />
+    	<form th:action="@{/addtask}" method="post">
+    		<input type="text" name="taskName" />
     		<input type="submit" value="追加" />
     	</form>
     </body>
