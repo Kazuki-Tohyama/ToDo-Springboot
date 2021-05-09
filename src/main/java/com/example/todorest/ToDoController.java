@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ToDoController {	
-	private final ToDoService todoService;
+	private final ServiceInterface todoService;
 	
 	@Autowired
 	public ToDoController(ToDoService todoService) {
