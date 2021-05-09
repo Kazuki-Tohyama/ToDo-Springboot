@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ToDoController {	
-	private final ServiceInterface todoService;
+	private final ServiceInterface service;
 	
 	@Autowired
 	public ToDoController(ToDoService todoService) {
-		this.todoService = todoService;
+		this.service = todoService;
 	}
 	
 	@ModelAttribute("taskList")
 	public List<Task> setUpTaskList() {
-		return todoService.getTaskList();
+		return service.getTaskList();
 	}
 	
 	@GetMapping("/")
@@ -30,13 +30,13 @@ public class ToDoController {
 	
 	@PostMapping("/addtask")
 	public String addTask(@ModelAttribute Task newTask, Model model) {
-		todoService.add(newTask);
+		service.add(newTask);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/deletetask")
 	public String deleteTask(@ModelAttribute("id") int id, Model model) {
-		todoService.delete(id);
+		service.delete(id);
 		return "redirect:/";
 	}
 	

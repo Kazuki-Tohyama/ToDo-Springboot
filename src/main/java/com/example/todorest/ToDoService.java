@@ -7,23 +7,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ToDoService implements ServiceInterface {
-	private final RepositoryInterface todoRepository;
+	private final RepositoryInterface repository;
 	
 	@Autowired
 	public ToDoService(ToDoRepository repository) {
-		this.todoRepository = repository;
+		this.repository = repository;
 	}
 	
 	public List<Task> getTaskList() {
-		return todoRepository.findAll();
+		return repository.findAll();
 	}
 
 	public void add(Task item) {
-		todoRepository.addItem(item);
+		repository.addItem(item);
 	}
 
 	public void delete(int id) {
-		todoRepository.deleteItem(id);		
+		repository.deleteItem(id);		
 	}
 
 }
