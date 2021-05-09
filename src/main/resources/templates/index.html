@@ -10,7 +10,7 @@
     		<div th:each="task : ${taskList}">
     			<p th:text="${task.getTaskName()}"></p>
     			<form th:action="@{/deletetask}" method="post">
-    				<input type="hidden" name="id" th:value="${taskList.indexOf(task)}"/>
+    				<input type="hidden" name="id" th:value="${taskList.indexOf(task)}" />
     				<input type="submit" value="削除"/>
     			</form>
     		</div>

@@ -1,22 +1,26 @@
 package com.example.todorest;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ToDoController {
-	List<Task> taskList = new ArrayList<Task>();
+public class ToDoController {	
+	private final ToDoService todoService;
+	
+	@Autowired
+	public ToDoController(ToDoService todoService) {
+		this.todoService = todoService;
+	}
 	
 	@ModelAttribute("taskList")
 	public List<Task> setUpTaskList() {
-		return taskList;
+		return todoService.getTaskList();
 	}
 	
 	@GetMapping("/")
@@ -26,13 +30,13 @@ public class ToDoController {
 	
 	@PostMapping("/addtask")
 	public String addTask(@ModelAttribute Task newTask, Model model) {
-		taskList.add(newTask);
+		todoService.add(newTask);
 		return "redirect:/";
 	}
 	
 	@PostMapping("/deletetask")
-	public String deleteTask(@RequestParam int id, Model model) {
-		taskList.remove(id);
+	public String deleteTask(@ModelAttribute("id") int id, Model model) {
+		todoService.delete(id);
 		return "redirect:/";
 	}
 	
