@@ -4,6 +4,7 @@ public class Task {
 	private int id;
 	private String taskName;
 	private boolean isDone;
+	private int userId;
 	
 	public Task(String taskName, boolean isDone) {
 		this.taskName = taskName;
@@ -27,6 +28,10 @@ public class Task {
 		return this.isDone;
 	}
 	
+	public int getUserId() {
+		return this.userId;
+	}
+	
 	public void setTaskName(String taskName) {
 		this.taskName = taskName;
 	}
@@ -37,5 +42,9 @@ public class Task {
 	
 	public void setIsDone(boolean isDone) {
 		this.isDone = isDone;
+	}
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }
