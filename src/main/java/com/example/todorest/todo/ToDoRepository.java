@@ -1,4 +1,4 @@
-package com.example.todorest;
+package com.example.todorest.todo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
