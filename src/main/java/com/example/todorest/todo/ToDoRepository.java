@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,7 +24,9 @@ public class ToDoRepository implements RepositoryInterface {
 
 	@Override
 	public List<Task> findAll() {
-		final String query = "SELECT * FROM todo";
+		int userId = getUserId();
+		
+		final String query = "SELECT * FROM todo where userid = ?";
 		List<Task> allTaskList = template.query(query, new RowMapper<Task>() {
 			@Override
 			public Task mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -33,7 +37,7 @@ public class ToDoRepository implements RepositoryInterface {
 				task.setUserId(rs.getInt("userid"));
 				return task;
 			}
-		});
+		}, userId);
 		return allTaskList;
 	}
 
@@ -41,7 +45,7 @@ public class ToDoRepository implements RepositoryInterface {
 	public void addItem(Task item) {
 		String name = item.getTaskName();
 		boolean isdone = item.isDone();
-		int userId = item.getUserId();
+		int userId = getUserId();
 		final String query = "INSERT INTO todo(name, isdone, userid) VALUE(?,?,?)";
 		template.update(query, name, isdone, userId);
 	}
@@ -52,4 +56,22 @@ public class ToDoRepository implements RepositoryInterface {
 		template.update(query, id);
 	}
 	
+	private int getUserId() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		
+		final String query = "SELECT * FROM user where username = ?";
+		List<LoginUser> userResult = template.query(query, new RowMapper<LoginUser>() {
+			@Override
+			public LoginUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+				int id = rs.getInt("id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				LoginUser user = new LoginUser(id, username, password);
+				return user;
+			}
+		}, username);
+		
+		return userResult.get(0).getUserId();
+	}
 }
