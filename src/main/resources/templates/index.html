@@ -6,6 +6,10 @@
     </head>
     <body>
     	<div th:if="${taskList.size() == 0}">タスクがありません。</div>
+    	<button onclick="document.logoutForm.submit()">ログアウト</button>
+    		<form th:action="@{/signout}" name="logoutForm" method="post">
+    			<input type="submit" hidden="true" value="logout"/>
+    		</form>
     	<div th:unless="${taskList.size() == 0}">
     		<div th:each="task : ${taskList}">
     			<p th:text="${task.getTaskName()}"></p>
