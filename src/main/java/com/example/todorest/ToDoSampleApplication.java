@@ -1,4 +1,4 @@
-package com.example.todorest.todo;
+package com.example.todorest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

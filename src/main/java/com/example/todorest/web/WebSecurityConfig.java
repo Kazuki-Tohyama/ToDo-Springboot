@@ -1,4 +1,4 @@
-package com.example.todorest.todo;
+package com.example.todorest.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.example.todorest.web.user.UserService;
 
 @Configuration
 @EnableWebSecurity

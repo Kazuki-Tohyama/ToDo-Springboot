@@ -1,4 +1,4 @@
-package com.example.todorest.todo;
+package com.example.todorest.web.user;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

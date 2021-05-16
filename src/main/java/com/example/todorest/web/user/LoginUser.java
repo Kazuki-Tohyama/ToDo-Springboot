@@ -1,4 +1,4 @@
-package com.example.todorest.todo;
+package com.example.todorest.web.user;
 
 public class LoginUser {
 	private int userId;

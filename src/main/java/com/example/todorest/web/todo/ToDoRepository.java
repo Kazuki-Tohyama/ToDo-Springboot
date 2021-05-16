@@ -1,4 +1,4 @@
-package com.example.todorest.todo;
+package com.example.todorest.web.todo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
+
+import com.example.todorest.web.user.LoginUser;
 
 @Repository
 public class ToDoRepository implements RepositoryInterface {

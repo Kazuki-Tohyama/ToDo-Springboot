@@ -1,4 +1,4 @@
-package com.example.todorest.todo;
+package com.example.todorest.web.user;
 
 public interface UserRepositoryInterface {
 	LoginUser findUserByUsername(String username);
